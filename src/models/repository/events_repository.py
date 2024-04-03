@@ -11,7 +11,7 @@ class EventsRepository:
                 event = Events(
                     id=eventsInfo.get("uuid"),
                     title=eventsInfo.get("title"),
-                    details=eventsInfo.get("detail"),
+                    details=eventsInfo.get("details"),
                     slug=eventsInfo.get("slug"),
                     maximum_attendees=eventsInfo.get("maximum_attendees")
                 )
@@ -36,4 +36,4 @@ class EventsRepository:
                 )
                 return event
             except NoResultFound:
-                return 'User not found.'
+                return 'Event not found.'
