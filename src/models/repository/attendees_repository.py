@@ -42,5 +42,6 @@ class AttendeesRepository:
                         )
                         .one()
                 )
+                return attendee
             except NoResultFound:
                 return 'User not found.'

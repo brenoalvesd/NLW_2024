@@ -27,3 +27,19 @@ class AttendeesHandler:
             body={ "response": "Attendee successfully registered" },
               status_code=201
             )
+    
+    def find_attendee_badge(self, http_request: HTTPRequest) -> HTTPResponse:
+        attendee_id = http_request.param["attendee_id"]
+        badge = self.__attendees_repository.get_attendee_badge_by_id(attendee_id)
+        if not badge: raise Exception("Attendee not found")
+
+        return HTTPResponse(
+            body={
+                "badge": {
+                    "name": badge.name,
+                    "email": badge.email,
+                    "event_title": badge.title
+                }
+            },
+            status_code=200
+        )
