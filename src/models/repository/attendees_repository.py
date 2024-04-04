@@ -5,6 +5,7 @@ from src.models.entities.check_ins import CheckIns
 from src.models.repository.events_repository import Events
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm.exc import NoResultFound
+from src.errors.error_types.http_conflict import HTTPConflictError
 
 
 class AttendeesRepository:
@@ -24,7 +25,7 @@ class AttendeesRepository:
 
                 return attendee_info
             except IntegrityError:
-                raise Exception('User already registered!')
+                raise HTTPConflictError('User already registered!')
             except Exception as exception:
                 database.session.rollback()
                 raise exception
